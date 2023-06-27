@@ -48,6 +48,10 @@
             kodyPocztoweDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             localizationBindingSource = new BindingSource(components);
             searchGroupBox = new GroupBox();
+            uwagiLabel = new Label();
+            uwagiTextBox = new TextBox();
+            editKodPocztowyButton = new Button();
+            editLocalizationButton = new Button();
             powiatLabel = new Label();
             wojewodztwoLabel = new Label();
             miejscowoscLabel = new Label();
@@ -62,6 +66,9 @@
             idTextBox = new TextBox();
             idLabel = new Label();
             kodPocztowyChangeGroupBox = new GroupBox();
+            changeKodPocztowyUwagiLabel = new Label();
+            changeKodPocztowyUwagiTextBox = new TextBox();
+            deleteKodPocztowyButton = new Button();
             changeKodPocztowyPowiatLabel = new Label();
             changeKodPocztowyWojewodtwoLabel = new Label();
             changeKodPocztowyMiejscowoscLabel = new Label();
@@ -76,16 +83,17 @@
             changeKodPocztowyTextBox = new TextBox();
             changeKodPocztowyIdTextBox = new TextBox();
             localizationChangeGroupBox = new GroupBox();
+            deleteLocalizationButton = new Button();
             changeLocalizationKodPocztowyIdLabel = new Label();
             changeLocalizationIdLabel = new Label();
             changeLocalizationDescriptionLabel = new Label();
             changeLocalizationNameLabel = new Label();
             changesLocalizationButton = new Button();
-            textBox10 = new TextBox();
-            textBox9 = new TextBox();
-            textBox8 = new TextBox();
-            textBox7 = new TextBox();
-            dataGridView1 = new DataGridView();
+            changeLocalizationKodPocztowyIdTextBox = new TextBox();
+            changeLocalizationDescriptionTextBox = new TextBox();
+            changeLocalizationNameTextBox = new TextBox();
+            changeLocalizationIdTextBox = new TextBox();
+            kodPocztowySearchedGridView = new DataGridView();
             idDataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
             kodPocztowyDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             adresDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -97,7 +105,7 @@
             kodyPocztoweSearchedBindingSource = new BindingSource(components);
             label2 = new Label();
             label3 = new Label();
-            dataGridView2 = new DataGridView();
+            localizationsSearchedGridView = new DataGridView();
             idDataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
             nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             descriptionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
@@ -112,9 +120,9 @@
             searchGroupBox.SuspendLayout();
             kodPocztowyChangeGroupBox.SuspendLayout();
             localizationChangeGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)kodPocztowySearchedGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)kodyPocztoweSearchedBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)localizationsSearchedGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)localizationSearchedBindingSource).BeginInit();
             SuspendLayout();
             // 
@@ -260,6 +268,10 @@
             // 
             // searchGroupBox
             // 
+            searchGroupBox.Controls.Add(uwagiLabel);
+            searchGroupBox.Controls.Add(uwagiTextBox);
+            searchGroupBox.Controls.Add(editKodPocztowyButton);
+            searchGroupBox.Controls.Add(editLocalizationButton);
             searchGroupBox.Controls.Add(powiatLabel);
             searchGroupBox.Controls.Add(wojewodztwoLabel);
             searchGroupBox.Controls.Add(miejscowoscLabel);
@@ -275,10 +287,46 @@
             searchGroupBox.Controls.Add(idLabel);
             searchGroupBox.Location = new Point(12, 226);
             searchGroupBox.Name = "searchGroupBox";
-            searchGroupBox.Size = new Size(372, 250);
+            searchGroupBox.Size = new Size(372, 337);
             searchGroupBox.TabIndex = 3;
             searchGroupBox.TabStop = false;
             searchGroupBox.Text = "Search Box";
+            // 
+            // uwagiLabel
+            // 
+            uwagiLabel.AutoSize = true;
+            uwagiLabel.Location = new Point(6, 197);
+            uwagiLabel.Name = "uwagiLabel";
+            uwagiLabel.Size = new Size(40, 15);
+            uwagiLabel.TabIndex = 16;
+            uwagiLabel.Text = "Uwagi";
+            // 
+            // uwagiTextBox
+            // 
+            uwagiTextBox.Location = new Point(6, 215);
+            uwagiTextBox.Name = "uwagiTextBox";
+            uwagiTextBox.Size = new Size(354, 23);
+            uwagiTextBox.TabIndex = 15;
+            // 
+            // editKodPocztowyButton
+            // 
+            editKodPocztowyButton.Location = new Point(197, 253);
+            editKodPocztowyButton.Name = "editKodPocztowyButton";
+            editKodPocztowyButton.Size = new Size(163, 31);
+            editKodPocztowyButton.TabIndex = 14;
+            editKodPocztowyButton.Text = "Edit Kod pocztowy";
+            editKodPocztowyButton.UseVisualStyleBackColor = true;
+            editKodPocztowyButton.Click += editKodPocztowyButton_Click;
+            // 
+            // editLocalizationButton
+            // 
+            editLocalizationButton.Location = new Point(197, 297);
+            editLocalizationButton.Name = "editLocalizationButton";
+            editLocalizationButton.Size = new Size(163, 28);
+            editLocalizationButton.TabIndex = 13;
+            editLocalizationButton.Text = "Edit Localization";
+            editLocalizationButton.UseVisualStyleBackColor = true;
+            editLocalizationButton.Click += editLocalizationButton_Click;
             // 
             // powiatLabel
             // 
@@ -318,12 +366,13 @@
             // 
             // searchButton
             // 
-            searchButton.Location = new Point(125, 215);
+            searchButton.Location = new Point(30, 253);
             searchButton.Name = "searchButton";
-            searchButton.Size = new Size(117, 23);
+            searchButton.Size = new Size(117, 43);
             searchButton.TabIndex = 8;
             searchButton.Text = "Search";
             searchButton.UseVisualStyleBackColor = true;
+            searchButton.Click += searchButton_Click;
             // 
             // powiatTextBox
             // 
@@ -387,6 +436,9 @@
             // 
             // kodPocztowyChangeGroupBox
             // 
+            kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyUwagiLabel);
+            kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyUwagiTextBox);
+            kodPocztowyChangeGroupBox.Controls.Add(deleteKodPocztowyButton);
             kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyPowiatLabel);
             kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyWojewodtwoLabel);
             kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyMiejscowoscLabel);
@@ -402,10 +454,37 @@
             kodPocztowyChangeGroupBox.Controls.Add(changeKodPocztowyIdTextBox);
             kodPocztowyChangeGroupBox.Location = new Point(419, 232);
             kodPocztowyChangeGroupBox.Name = "kodPocztowyChangeGroupBox";
-            kodPocztowyChangeGroupBox.Size = new Size(383, 244);
+            kodPocztowyChangeGroupBox.Size = new Size(383, 331);
             kodPocztowyChangeGroupBox.TabIndex = 4;
             kodPocztowyChangeGroupBox.TabStop = false;
             kodPocztowyChangeGroupBox.Text = "Kod Pocztowy Change Box";
+            kodPocztowyChangeGroupBox.Visible = false;
+            // 
+            // changeKodPocztowyUwagiLabel
+            // 
+            changeKodPocztowyUwagiLabel.AutoSize = true;
+            changeKodPocztowyUwagiLabel.Location = new Point(6, 191);
+            changeKodPocztowyUwagiLabel.Name = "changeKodPocztowyUwagiLabel";
+            changeKodPocztowyUwagiLabel.Size = new Size(40, 15);
+            changeKodPocztowyUwagiLabel.TabIndex = 15;
+            changeKodPocztowyUwagiLabel.Text = "Uwagi";
+            // 
+            // changeKodPocztowyUwagiTextBox
+            // 
+            changeKodPocztowyUwagiTextBox.Location = new Point(6, 209);
+            changeKodPocztowyUwagiTextBox.Name = "changeKodPocztowyUwagiTextBox";
+            changeKodPocztowyUwagiTextBox.Size = new Size(371, 23);
+            changeKodPocztowyUwagiTextBox.TabIndex = 14;
+            // 
+            // deleteKodPocztowyButton
+            // 
+            deleteKodPocztowyButton.Location = new Point(227, 267);
+            deleteKodPocztowyButton.Name = "deleteKodPocztowyButton";
+            deleteKodPocztowyButton.Size = new Size(132, 52);
+            deleteKodPocztowyButton.TabIndex = 13;
+            deleteKodPocztowyButton.Text = "Delete Record";
+            deleteKodPocztowyButton.UseVisualStyleBackColor = true;
+            deleteKodPocztowyButton.Click += deleteKodPocztowyButton_Click;
             // 
             // changeKodPocztowyPowiatLabel
             // 
@@ -463,12 +542,13 @@
             // 
             // changesKodPocztowyButton
             // 
-            changesKodPocztowyButton.Location = new Point(129, 209);
+            changesKodPocztowyButton.Location = new Point(28, 267);
             changesKodPocztowyButton.Name = "changesKodPocztowyButton";
-            changesKodPocztowyButton.Size = new Size(132, 23);
+            changesKodPocztowyButton.Size = new Size(132, 52);
             changesKodPocztowyButton.TabIndex = 6;
             changesKodPocztowyButton.Text = "Apply Changes";
             changesKodPocztowyButton.UseVisualStyleBackColor = true;
+            changesKodPocztowyButton.Click += changesKodPocztowyButton_Click;
             // 
             // changeKodPocztowyPowiatTextBox
             // 
@@ -515,21 +595,33 @@
             // 
             // localizationChangeGroupBox
             // 
+            localizationChangeGroupBox.Controls.Add(deleteLocalizationButton);
             localizationChangeGroupBox.Controls.Add(changeLocalizationKodPocztowyIdLabel);
             localizationChangeGroupBox.Controls.Add(changeLocalizationIdLabel);
             localizationChangeGroupBox.Controls.Add(changeLocalizationDescriptionLabel);
             localizationChangeGroupBox.Controls.Add(changeLocalizationNameLabel);
             localizationChangeGroupBox.Controls.Add(changesLocalizationButton);
-            localizationChangeGroupBox.Controls.Add(textBox10);
-            localizationChangeGroupBox.Controls.Add(textBox9);
-            localizationChangeGroupBox.Controls.Add(textBox8);
-            localizationChangeGroupBox.Controls.Add(textBox7);
+            localizationChangeGroupBox.Controls.Add(changeLocalizationKodPocztowyIdTextBox);
+            localizationChangeGroupBox.Controls.Add(changeLocalizationDescriptionTextBox);
+            localizationChangeGroupBox.Controls.Add(changeLocalizationNameTextBox);
+            localizationChangeGroupBox.Controls.Add(changeLocalizationIdTextBox);
             localizationChangeGroupBox.Location = new Point(829, 232);
             localizationChangeGroupBox.Name = "localizationChangeGroupBox";
-            localizationChangeGroupBox.Size = new Size(387, 244);
+            localizationChangeGroupBox.Size = new Size(387, 331);
             localizationChangeGroupBox.TabIndex = 5;
             localizationChangeGroupBox.TabStop = false;
             localizationChangeGroupBox.Text = "Localization Change Box";
+            localizationChangeGroupBox.Visible = false;
+            // 
+            // deleteLocalizationButton
+            // 
+            deleteLocalizationButton.Location = new Point(220, 267);
+            deleteLocalizationButton.Name = "deleteLocalizationButton";
+            deleteLocalizationButton.Size = new Size(135, 52);
+            deleteLocalizationButton.TabIndex = 9;
+            deleteLocalizationButton.Text = "Delete Record";
+            deleteLocalizationButton.UseVisualStyleBackColor = true;
+            deleteLocalizationButton.Click += deleteLocalizationButton_Click;
             // 
             // changeLocalizationKodPocztowyIdLabel
             // 
@@ -569,56 +661,57 @@
             // 
             // changesLocalizationButton
             // 
-            changesLocalizationButton.Location = new Point(123, 209);
+            changesLocalizationButton.Location = new Point(26, 267);
             changesLocalizationButton.Name = "changesLocalizationButton";
-            changesLocalizationButton.Size = new Size(135, 23);
+            changesLocalizationButton.Size = new Size(135, 52);
             changesLocalizationButton.TabIndex = 4;
             changesLocalizationButton.Text = "Apply Changes";
             changesLocalizationButton.UseVisualStyleBackColor = true;
+            changesLocalizationButton.Click += changesLocalizationButton_Click;
             // 
-            // textBox10
+            // changeLocalizationKodPocztowyIdTextBox
             // 
-            textBox10.Location = new Point(194, 40);
-            textBox10.Name = "textBox10";
-            textBox10.Size = new Size(187, 23);
-            textBox10.TabIndex = 3;
+            changeLocalizationKodPocztowyIdTextBox.Location = new Point(194, 40);
+            changeLocalizationKodPocztowyIdTextBox.Name = "changeLocalizationKodPocztowyIdTextBox";
+            changeLocalizationKodPocztowyIdTextBox.Size = new Size(187, 23);
+            changeLocalizationKodPocztowyIdTextBox.TabIndex = 3;
             // 
-            // textBox9
+            // changeLocalizationDescriptionTextBox
             // 
-            textBox9.Location = new Point(6, 159);
-            textBox9.Name = "textBox9";
-            textBox9.Size = new Size(375, 23);
-            textBox9.TabIndex = 2;
+            changeLocalizationDescriptionTextBox.Location = new Point(6, 159);
+            changeLocalizationDescriptionTextBox.Name = "changeLocalizationDescriptionTextBox";
+            changeLocalizationDescriptionTextBox.Size = new Size(375, 23);
+            changeLocalizationDescriptionTextBox.TabIndex = 2;
             // 
-            // textBox8
+            // changeLocalizationNameTextBox
             // 
-            textBox8.Location = new Point(6, 103);
-            textBox8.Name = "textBox8";
-            textBox8.Size = new Size(375, 23);
-            textBox8.TabIndex = 1;
+            changeLocalizationNameTextBox.Location = new Point(6, 103);
+            changeLocalizationNameTextBox.Name = "changeLocalizationNameTextBox";
+            changeLocalizationNameTextBox.Size = new Size(375, 23);
+            changeLocalizationNameTextBox.TabIndex = 1;
             // 
-            // textBox7
+            // changeLocalizationIdTextBox
             // 
-            textBox7.Enabled = false;
-            textBox7.Location = new Point(6, 40);
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(155, 23);
-            textBox7.TabIndex = 0;
+            changeLocalizationIdTextBox.Enabled = false;
+            changeLocalizationIdTextBox.Location = new Point(6, 40);
+            changeLocalizationIdTextBox.Name = "changeLocalizationIdTextBox";
+            changeLocalizationIdTextBox.Size = new Size(155, 23);
+            changeLocalizationIdTextBox.TabIndex = 0;
             // 
-            // dataGridView1
+            // kodPocztowySearchedGridView
             // 
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false;
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, kodPocztowyDataGridViewTextBoxColumn1, adresDataGridViewTextBoxColumn1, miejscowoscDataGridViewTextBoxColumn1, wojewodztwoDataGridViewTextBoxColumn1, powiatDataGridViewTextBoxColumn1, uwagiDataGridViewTextBoxColumn1, localizationsDataGridViewTextBoxColumn1 });
-            dataGridView1.DataSource = kodyPocztoweSearchedBindingSource;
-            dataGridView1.Location = new Point(12, 508);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(744, 274);
-            dataGridView1.TabIndex = 6;
+            kodPocztowySearchedGridView.AllowUserToAddRows = false;
+            kodPocztowySearchedGridView.AllowUserToDeleteRows = false;
+            kodPocztowySearchedGridView.AutoGenerateColumns = false;
+            kodPocztowySearchedGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            kodPocztowySearchedGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn2, kodPocztowyDataGridViewTextBoxColumn1, adresDataGridViewTextBoxColumn1, miejscowoscDataGridViewTextBoxColumn1, wojewodztwoDataGridViewTextBoxColumn1, powiatDataGridViewTextBoxColumn1, uwagiDataGridViewTextBoxColumn1, localizationsDataGridViewTextBoxColumn1 });
+            kodPocztowySearchedGridView.DataSource = kodyPocztoweSearchedBindingSource;
+            kodPocztowySearchedGridView.Location = new Point(12, 593);
+            kodPocztowySearchedGridView.Name = "kodPocztowySearchedGridView";
+            kodPocztowySearchedGridView.ReadOnly = true;
+            kodPocztowySearchedGridView.RowTemplate.Height = 25;
+            kodPocztowySearchedGridView.Size = new Size(744, 296);
+            kodPocztowySearchedGridView.TabIndex = 6;
             // 
             // idDataGridViewTextBoxColumn2
             // 
@@ -684,7 +777,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 490);
+            label2.Location = new Point(12, 575);
             label2.Name = "label2";
             label2.Size = new Size(77, 15);
             label2.TabIndex = 7;
@@ -699,20 +792,20 @@
             label3.TabIndex = 8;
             label3.Text = "Data from Database";
             // 
-            // dataGridView2
+            // localizationsSearchedGridView
             // 
-            dataGridView2.AllowUserToAddRows = false;
-            dataGridView2.AllowUserToDeleteRows = false;
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn3, nameDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn1, kodyPocztoweIdDataGridViewTextBoxColumn1, kodyPocztoweDataGridViewTextBoxColumn1 });
-            dataGridView2.DataSource = localizationSearchedBindingSource;
-            dataGridView2.Location = new Point(773, 508);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.ReadOnly = true;
-            dataGridView2.RowTemplate.Height = 25;
-            dataGridView2.Size = new Size(443, 274);
-            dataGridView2.TabIndex = 9;
+            localizationsSearchedGridView.AllowUserToAddRows = false;
+            localizationsSearchedGridView.AllowUserToDeleteRows = false;
+            localizationsSearchedGridView.AutoGenerateColumns = false;
+            localizationsSearchedGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            localizationsSearchedGridView.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn3, nameDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn1, kodyPocztoweIdDataGridViewTextBoxColumn1, kodyPocztoweDataGridViewTextBoxColumn1 });
+            localizationsSearchedGridView.DataSource = localizationSearchedBindingSource;
+            localizationsSearchedGridView.Location = new Point(773, 593);
+            localizationsSearchedGridView.Name = "localizationsSearchedGridView";
+            localizationsSearchedGridView.ReadOnly = true;
+            localizationsSearchedGridView.RowTemplate.Height = 25;
+            localizationsSearchedGridView.Size = new Size(443, 296);
+            localizationsSearchedGridView.TabIndex = 9;
             // 
             // idDataGridViewTextBoxColumn3
             // 
@@ -757,7 +850,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(773, 490);
+            label4.Location = new Point(773, 575);
             label4.Name = "label4";
             label4.Size = new Size(77, 15);
             label4.TabIndex = 10;
@@ -767,12 +860,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1228, 794);
+            ClientSize = new Size(1228, 901);
             Controls.Add(label4);
-            Controls.Add(dataGridView2);
+            Controls.Add(localizationsSearchedGridView);
             Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(dataGridView1);
+            Controls.Add(kodPocztowySearchedGridView);
             Controls.Add(localizationChangeGroupBox);
             Controls.Add(kodPocztowyChangeGroupBox);
             Controls.Add(searchGroupBox);
@@ -781,6 +874,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)kodyPocztoweGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)kodyPocztoweBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)localizationsGridView).EndInit();
@@ -791,9 +885,9 @@
             kodPocztowyChangeGroupBox.PerformLayout();
             localizationChangeGroupBox.ResumeLayout(false);
             localizationChangeGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)kodPocztowySearchedGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)kodyPocztoweSearchedBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)localizationsSearchedGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)localizationSearchedBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -857,7 +951,7 @@
         private Label changeLocalizationIdLabel;
         private Label changeLocalizationDescriptionLabel;
         private Label changeLocalizationNameLabel;
-        private DataGridView dataGridView1;
+        private DataGridView kodPocztowySearchedGridView;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn kodPocztowyDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn adresDataGridViewTextBoxColumn1;
@@ -869,7 +963,7 @@
         private BindingSource kodyPocztoweSearchedBindingSource;
         private Label label2;
         private Label label3;
-        private DataGridView dataGridView2;
+        private DataGridView localizationsSearchedGridView;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn3;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn1;
@@ -877,5 +971,17 @@
         private DataGridViewTextBoxColumn kodyPocztoweDataGridViewTextBoxColumn1;
         private BindingSource localizationSearchedBindingSource;
         private Label label4;
+        private Button editKodPocztowyButton;
+        private Button editLocalizationButton;
+        private Label uwagiLabel;
+        private TextBox uwagiTextBox;
+        private Button deleteKodPocztowyButton;
+        private Button deleteLocalizationButton;
+        private Label changeKodPocztowyUwagiLabel;
+        private TextBox changeKodPocztowyUwagiTextBox;
+        private TextBox changeLocalizationKodPocztowyIdTextBox;
+        private TextBox changeLocalizationDescriptionTextBox;
+        private TextBox changeLocalizationNameTextBox;
+        private TextBox changeLocalizationIdTextBox;
     }
 }
